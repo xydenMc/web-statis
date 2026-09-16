@@ -42,7 +42,7 @@ export function InfiniteMovingCards({
   const renderCard = (item: InfiniteCard, key: string, ariaHidden?: boolean) => (
     <li key={key} aria-hidden={ariaHidden} className={cardClasses}>
       <div className="flex flex-col gap-space-sm">
-        <div className="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container shadow-[0_0_12px_rgba(0,242,254,0.25)]">
+        <div className="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container">
           <span className="material-symbols-outlined">{item.icon}</span>
        </div>
         <h3 className="text-primary font-headline-sm text-headline-sm">{item.title}</h3>

@@ -59,8 +59,12 @@ const config: Config = {
       },
       borderRadius: {
         DEFAULT: "1rem",
-        lg: "2rem",
-        xl: "3rem",
+        sm: "0.75rem",
+        md: "0.875rem",
+        lg: "1rem",
+        xl: "1.25rem",
+        "2xl": "1.25rem",
+        "3xl": "1.25rem",
         full: "9999px",
       },
       spacing: {

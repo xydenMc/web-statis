@@ -36,6 +36,14 @@
   display: none;
 }
 
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Reveal on Scroll Effect Styles */
 .scroll-reveal {
   opacity: 0;

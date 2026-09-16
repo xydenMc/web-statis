@@ -14,6 +14,9 @@ export type CarouselSlide = {
   iconTone: "primary" | "secondary" | "pink";
   tech: string[];
   image?: string;
+  role?: string;
+  demoUrl?: string;
+  sourceUrl?: string;
 };
 
 export function Carousel({
@@ -65,7 +68,7 @@ export function Carousel({
       onBlur={() => setPaused(false)}
     >
       <div className="relative">
-      <div className="relative overflow-hidden rounded-xl bg-surface-container-low/60 backdrop-blur-2xl border border-white/10 shadow-[0_24px_56px_-16px_rgba(0,0,0,0.55),inset_0_1px_1px_0_rgba(255,255,255,0.22)] p-space-lg lg:p-space-2xl lg:px-20 min-h-[420px]">
+      <div className="relative overflow-hidden rounded-2xl bg-surface-container-low/60 backdrop-blur-2xl border border-white/10 shadow-[0_24px_56px_-16px_rgba(0,0,0,0.55),inset_0_1px_1px_0_rgba(255,255,255,0.18)] p-space-lg lg:p-space-2xl lg:px-20 min-h-[420px]">
         <AnimatePresence mode="wait" custom={dirRef.current}>
           <motion.div
             key={slide.title}
@@ -97,6 +100,11 @@ export function Carousel({
               <p className="text-on-surface-variant font-body-lg text-body-lg max-w-2xl leading-relaxed">
                 {slide.description}
             </p>
+              {slide.role && (
+                <p className="text-on-surface-variant font-body-sm text-body-sm">
+                  <strong className="text-primary-container">Peran:</strong> {slide.role}
+                </p>
+              )}
               <p className="text-on-surface-variant font-body-md text-body-md">
                 <strong className="text-primary">Impact</strong> {slide.impact}
             </p>
@@ -110,6 +118,32 @@ export function Carousel({
                 </span>
                 ))}
             </div>
+              {(slide.demoUrl || slide.sourceUrl) && (
+                <div className="flex flex-wrap items-center gap-space-sm pt-space-2xs">
+                  {slide.demoUrl && (
+                    <a
+                      href={slide.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary-container/15 text-primary-container font-label-md text-xs font-semibold border border-primary-container/30 hover:bg-primary-container/25 transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-base">open_in_new</span>
+                      Demo
+                    </a>
+                  )}
+                  {slide.sourceUrl && (
+                    <a
+                      href={slide.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-container-high/40 text-on-surface-variant font-label-md text-xs font-semibold border border-white/10 hover:text-primary transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-base">code</span>
+                      Source
+                    </a>
+                  )}
+                </div>
+              )}
           </div>
             <div className="lg:col-span-5 flex items-center justify-center">
               <div className="w-full max-w-md rounded-2xl overflow-hidden">

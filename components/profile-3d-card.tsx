@@ -174,7 +174,7 @@ export function Profile3DCard({
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-transparent to-surface-container-lowest/70 pointer-events-none" />
           
-          <div className="absolute bottom-space-sm left-space-sm right-space-sm bg-surface-container-lowest/75 backdrop-blur-xl border border-white/10 rounded-full px-space-md py-space-xs flex items-center justify-between shadow-[0_4px_16px_rgba(0,0,0,0.3)]">
+          <div className="absolute bottom-space-sm left-space-sm right-space-sm bg-surface-container-lowest/75 backdrop-blur-xl border border-white/10 rounded-xl px-space-md py-space-xs flex items-center justify-between shadow-[0_4px_16px_rgba(0,0,0,0.3)]">
             <span className="flex items-center gap-space-xs text-primary font-label-md text-label-md">
               <span className="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00f2fe] animate-pulse" />
               Davin Loise S.A.H

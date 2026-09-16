@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export type NavItem = {
   name: string;
   link: string;
-  icon?: React.ReactNode;
+  icon?: string;
 };
 
 export function FloatingNav({
@@ -17,16 +17,19 @@ export function FloatingNav({
   navItems: NavItem[];
   className?: string;
 }) {
-  const [active, setActive] = useState<string>(navItems[0]?.link ?? "#about");
+  const [active, setActive] = useState<string>(navItems[0]?.link ?? "#home");
   const [visible, setVisible] = useState<boolean>(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
-  // Scroll-spy + auto-hide-on-scroll-down behavior
   useEffect(() => {
     let lastY = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
       setVisible(
-        y < 24 || y < lastY || y + window.innerHeight >= document.body.offsetHeight - 24,
+        y < 24 ||
+          y < lastY ||
+          y + window.innerHeight >= document.body.offsetHeight - 24 ||
+          mobileMenuOpen,
       );
       lastY = y;
     };
@@ -39,7 +42,7 @@ export function FloatingNav({
           }
         });
       },
-      { rootMargin: "-40% 0px -50% 0px", threshold: 0.01 },
+      { rootMargin: "-30% 0px -50% 0px", threshold: 0.01 },
     );
 
     document.querySelectorAll("main section[id]").forEach((s) => observer.observe(s));
@@ -49,7 +52,7 @@ export function FloatingNav({
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [mobileMenuOpen]);
 
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
     if (link.startsWith("#")) {
@@ -58,6 +61,7 @@ export function FloatingNav({
       if (el) {
         (el as HTMLElement).scrollIntoView({ behavior: "smooth", block: "start" });
         setActive(link);
+        setMobileMenuOpen(false);
       }
     }
   };
@@ -70,20 +74,22 @@ export function FloatingNav({
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
         className={cn(
-          "fixed top-0 inset-x-0 z-50 px-gutter-mobile lg:px-gutter-desktop pt-space-sm",
+          "fixed top-0 inset-x-0 z-50 px-gutter-mobile lg:px-gutter-desktop pt-space-xs md:pt-space-sm",
           !visible && "pointer-events-none",
           className,
         )}
         style={{ opacity: visible ? 1 : 0, transition: "opacity 0.25s ease-out" }}
       >
-        <div className="flex justify-center items-center">
+        {/* Desktop / tablet: centered nav */}
+        <div className="hidden md:flex justify-center">
           <nav
             className={cn(
-              "flex items-center gap-space-xs",
-              "bg-surface-container-high/40 px-space-xs py-space-2xs rounded-full",
+              "flex items-center gap-0.5 pointer-events-auto",
+              "bg-surface-container-high/50 px-1.5 py-1 rounded-xl",
               "backdrop-blur-md",
-              "shadow-[0_20px_48px_-12px_rgba(0,0,0,0.55),inset_0_1px_1px_0_rgba(255,255,255,0.25)]",
+              "shadow-[0_16px_40px_-12px_rgba(0,0,0,0.5),inset_0_1px_1px_0_rgba(255,255,255,0.18)]",
               "border border-white/10",
+              "overflow-x-auto no-scrollbar max-w-full",
             )}
           >
             {navItems.map((item) => {
@@ -94,19 +100,68 @@ export function FloatingNav({
                   href={item.link}
                   onClick={(e) => onClick(e, item.link)}
                   className={cn(
-                    "transition-colors font-label-md text-label-md px-space-md py-space-xs rounded-full",
+                    "transition-colors font-label-md text-xs px-3 py-2 rounded-lg whitespace-nowrap shrink-0",
                     isActive
-                      ? "bg-primary-container text-on-primary-container shadow-[0_0_16px_rgba(0,242,254,0.35)]"
-                      : "text-on-surface-variant hover:text-on-surface",
+                      ? "bg-primary-container text-on-primary-container font-semibold"
+                      : "text-on-surface-variant hover:text-on-surface hover:bg-white/5",
                   )}
                 >
                   {item.name}
-            </a>
+                </a>
               );
             })}
-      </nav>
-    </div>
-  </motion.header>
-</AnimatePresence>
+          </nav>
+        </div>
+
+        {/* Mobile: hamburger only, no identity pill */}
+        <div className="md:hidden flex justify-end">
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+            className="flex items-center justify-center w-11 h-11 rounded-xl bg-surface-container-high/70 backdrop-blur-md border border-white/10 text-primary hover:bg-surface-container-high pointer-events-auto"
+          >
+            <span className="material-symbols-outlined">
+              {mobileMenuOpen ? "close" : "menu"}
+            </span>
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden mt-2 overflow-hidden rounded-xl bg-surface-container-low/95 backdrop-blur-2xl border border-white/10 p-2 shadow-2xl pointer-events-auto"
+            >
+              <div className="grid grid-cols-2 gap-1">
+                {navItems.map((item) => {
+                  const isActive = active === item.link;
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.link}
+                      onClick={(e) => onClick(e, item.link)}
+                      className={cn(
+                        "flex items-center gap-2 px-3 py-2.5 rounded-lg text-xs font-medium transition-colors min-h-[44px]",
+                        isActive
+                          ? "bg-primary-container text-on-primary-container font-semibold"
+                          : "text-on-surface-variant hover:bg-white/5 hover:text-on-surface",
+                      )}
+                    >
+                      {item.icon && (
+                        <span className="material-symbols-outlined text-base">{item.icon}</span>
+                      )}
+                      <span>{item.name}</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+    </AnimatePresence>
   );
 }

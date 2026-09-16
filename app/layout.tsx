@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk } from "next/font/google";
+// Next.js processes this stylesheet import at build time; TypeScript may not
+// have a declaration for CSS side-effect imports in some editor configurations.
+// @ts-expect-error CSS is handled by Next.js
+
 import "./globals.css";
 
 // Hanken Grotesk is self-hosted via next/font (zero CLS, no extra requests).
@@ -16,9 +20,9 @@ const hankenGrotesk = Hanken_Grotesk({
 // Next is upgraded past the version that exposes them.
 
 export const metadata: Metadata = {
-  title: "Portofolio Davin — Web Dev, UI/UX & Multimedia",
+  title: "Davin Loise S.A.H — Portfolio Siswa SMK RPL",
   description:
-    "Davin Loise Steven Alinsky Herlambang — pelajar XII RPL A SMKN 1 Jenangan Ponorogo. Portofolio Liquid Glass dengan komponen Aceternity.",
+    "Davin Loise Steven Alinsky Herlambang — siswa XII RPL A SMKN 1 Jenangan Ponorogo. Portofolio Web Development, UI/UX, Programming, dan AI-assisted development.",
 };
 
 export default function RootLayout({
@@ -27,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark scroll-smooth ${hankenGrotesk.variable}`}>
+    <html lang="id" className={`dark scroll-smooth ${hankenGrotesk.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
