@@ -74,21 +74,21 @@ export function FloatingNav({
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
         className={cn(
-          "fixed top-0 inset-x-0 z-50 px-gutter-mobile lg:px-gutter-desktop pt-space-xs md:pt-space-sm",
+          "fixed top-0 inset-x-0 z-50 px-[1.25rem] lg:px-[3rem] pt-[0.5rem] md:pt-[0.75rem]",
           !visible && "pointer-events-none",
           className,
         )}
         style={{ opacity: visible ? 1 : 0, transition: "opacity 0.25s ease-out" }}
       >
-        {/* Desktop / tablet: centered nav */}
+        {/* Desktop / tablet: centered nav with glass style */}
         <div className="hidden md:flex justify-center">
           <nav
             className={cn(
               "flex items-center gap-0.5 pointer-events-auto",
-              "bg-surface-container-high/50 px-1.5 py-1 rounded-xl",
-              "backdrop-blur-md",
-              "shadow-[0_16px_40px_-12px_rgba(0,0,0,0.5),inset_0_1px_1px_0_rgba(255,255,255,0.18)]",
-              "border border-white/10",
+              "bg-surfaceContainerLow/70 px-1.5 py-1 rounded-full",
+              "backdrop-blur-2xl",
+              "shadow-[0_8px_32px_-12px_rgba(28,28,25,0.4),inset_0_1px_1px_0_rgba(255,255,255,0.18)]",
+              "border border-border",
               "overflow-x-auto no-scrollbar max-w-full",
             )}
           >
@@ -100,10 +100,10 @@ export function FloatingNav({
                   href={item.link}
                   onClick={(e) => onClick(e, item.link)}
                   className={cn(
-                    "transition-colors font-label-md text-xs px-3 py-2 rounded-lg whitespace-nowrap shrink-0",
+                    "transition-colors font-label-md text-xs px-3 py-2 rounded-full whitespace-nowrap shrink-0",
                     isActive
-                      ? "bg-primary-container text-on-primary-container font-semibold"
-                      : "text-on-surface-variant hover:text-on-surface hover:bg-white/5",
+                      ? "bg-primary text-onPrimary font-semibold"
+                      : "text-onSurfaceVariant hover:text-primary hover:bg-white/10",
                   )}
                 >
                   {item.name}
@@ -119,9 +119,9 @@ export function FloatingNav({
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
-            className="flex items-center justify-center w-11 h-11 rounded-xl bg-surface-container-high/70 backdrop-blur-md border border-white/10 text-primary hover:bg-surface-container-high pointer-events-auto"
+            className="flex items-center justify-center w-11 h-11 rounded-full bg-surfaceContainerLow/70 backdrop-blur-md border border-border text-primary hover:bg-surfaceContainerLow transition-colors pointer-events-auto"
           >
-            <span className="material-symbols-outlined">
+            <span className="material-symbols-outlined text-base">
               {mobileMenuOpen ? "close" : "menu"}
             </span>
           </button>
@@ -133,7 +133,7 @@ export function FloatingNav({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-2 overflow-hidden rounded-xl bg-surface-container-low/95 backdrop-blur-2xl border border-white/10 p-2 shadow-2xl pointer-events-auto"
+              className="md:hidden mt-2 overflow-hidden rounded-full bg-surfaceContainerLow/95 backdrop-blur-2xl border border-border p-2 shadow-2xl pointer-events-auto"
             >
               <div className="grid grid-cols-2 gap-1">
                 {navItems.map((item) => {
@@ -144,10 +144,10 @@ export function FloatingNav({
                       href={item.link}
                       onClick={(e) => onClick(e, item.link)}
                       className={cn(
-                        "flex items-center gap-2 px-3 py-2.5 rounded-lg text-xs font-medium transition-colors min-h-[44px]",
+                        "flex items-center gap-2 px-3 py-2.5 rounded-full text-xs font-medium transition-colors min-h-[44px]",
                         isActive
-                          ? "bg-primary-container text-on-primary-container font-semibold"
-                          : "text-on-surface-variant hover:bg-white/5 hover:text-on-surface",
+                          ? "bg-primary text-onPrimary font-semibold"
+                          : "text-onSurfaceVariant hover:bg-white/10 hover:text-primary",
                       )}
                     >
                       {item.icon && (

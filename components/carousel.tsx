@@ -54,10 +54,10 @@ export function Carousel({
 
   const tone =
     slide.iconTone === "primary"
-      ? "bg-primary-container/10 text-primary-container shadow-[0_0_12px_rgba(0,242,254,0.25)]"
+      ? "bg-primary/10 text-primary shadow-[0_0_12px_rgba(63,107,69,0.25)]"
       : slide.iconTone === "pink"
-        ? "bg-tertiary-container/20 text-tertiary-fixed-dim shadow-[0_0_12px_rgba(255,175,212,0.25)]"
-        : "bg-secondary/15 text-secondary shadow-[0_0_12px_rgba(209,188,255,0.25)]";
+        ? "bg-tertiary/20 text-tertiary shadow-[0_0_12px_rgba(200,169,126,0.25)]"
+        : "bg-secondary/15 text-secondary shadow-[0_0_12px_rgba(122,155,118,0.25)]";
 
   return (
     <div
@@ -68,7 +68,7 @@ export function Carousel({
       onBlur={() => setPaused(false)}
     >
       <div className="relative">
-      <div className="relative overflow-hidden rounded-2xl bg-surface-container-low/60 backdrop-blur-2xl border border-white/10 shadow-[0_24px_56px_-16px_rgba(0,0,0,0.55),inset_0_1px_1px_0_rgba(255,255,255,0.18)] p-space-lg lg:p-space-2xl lg:px-20 min-h-[420px]">
+      <div className="relative overflow-hidden rounded-2xl bg-surface-container-low/60 backdrop-blur-2xl border border-border shadow-[0_24px_56px_-16px_rgba(0,0,0,0.55),inset_0_1px_1px_0_rgba(255,255,255,0.18)] p-space-lg lg:p-space-2xl lg:px-20 min-h-[420px]">
         <AnimatePresence mode="wait" custom={dirRef.current}>
           <motion.div
             key={slide.title}
@@ -102,7 +102,7 @@ export function Carousel({
             </p>
               {slide.role && (
                 <p className="text-on-surface-variant font-body-sm text-body-sm">
-                  <strong className="text-primary-container">Peran:</strong> {slide.role}
+                  <strong className="text-primary">Peran:</strong> {slide.role}
                 </p>
               )}
               <p className="text-on-surface-variant font-body-md text-body-md">
@@ -125,7 +125,7 @@ export function Carousel({
                       href={slide.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary-container/15 text-primary-container font-label-md text-xs font-semibold border border-primary-container/30 hover:bg-primary-container/25 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary/15 text-primary font-label-md text-xs font-semibold border border-primary/30 hover:bg-primary/25 transition-colors"
                     >
                       <span className="material-symbols-outlined text-base">open_in_new</span>
                       Demo
@@ -136,7 +136,7 @@ export function Carousel({
                       href={slide.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-container-high/40 text-on-surface-variant font-label-md text-xs font-semibold border border-white/10 hover:text-primary transition-colors"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-container-high/50 text-on-surface-variant font-label-md text-xs font-semibold border border-border hover:text-primary transition-colors"
                     >
                       <span className="material-symbols-outlined text-base">code</span>
                       Source
@@ -168,14 +168,14 @@ export function Carousel({
         <button
           aria-label="Slide sebelumnya"
           onClick={() => goTo(index - 1)}
-          className="absolute left-3 lg:-left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-surface-container-high/80 hover:bg-primary-container text-primary hover:text-on-primary-container backdrop-blur-md border border-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.35)] flex items-center justify-center transition-colors"
+          className="absolute left-3 lg:-left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-surface-container-high/80 hover:bg-primary text-on-primary backdrop-blur-md border border-border shadow-[0_8px_20px_rgba(0,0,0,0.35)] flex items-center justify-center transition-colors"
         >
           <span className="material-symbols-outlined">chevron_left</span>
       </button>
         <button
           aria-label="Slide berikutnya"
           onClick={() => goTo(index + 1)}
-          className="absolute right-3 lg:-right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-surface-container-high/80 hover:bg-primary-container text-primary hover:text-on-primary-container backdrop-blur-md border border-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.35)] flex items-center justify-center transition-colors"
+          className="absolute right-3 lg:-right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-surface-container-high/80 hover:bg-primary text-on-primary backdrop-blur-md border border-border shadow-[0_8px_20px_rgba(0,0,0,0.35)] flex items-center justify-center transition-colors"
         >
           <span className="material-symbols-outlined">chevron_right</span>
       </button>
@@ -191,7 +191,7 @@ export function Carousel({
             className={cn(
               "h-1.5 rounded-full transition-all duration-300",
               i === index
-                ? "w-8 bg-primary-container shadow-[0_0_10px_rgba(0,242,254,0.6)]"
+                ? "w-8 bg-primary shadow-[0_0_10px_rgba(63,107,69,0.5)]"
                 : "w-1.5 bg-surface-container-high/70 hover:bg-on-surface-variant",
             )}
           />

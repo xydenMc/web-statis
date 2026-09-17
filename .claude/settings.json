@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npx next *)",
+      "PowerShell(npx next build)",
+      "PowerShell(npm run build)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}

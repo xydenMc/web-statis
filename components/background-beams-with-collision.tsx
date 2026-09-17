@@ -181,7 +181,7 @@ function CollisionMechanism({
       <div
         style={{
           background:
-            "linear-gradient(to top, transparent, rgba(0,242,254,0.6) 30%, rgba(105,0,236,0.7) 70%, transparent)",
+            "linear-gradient(to top, transparent, rgba(63,107,69,0.5) 30%, rgba(118,155,118,0.4) 70%, transparent)",
         }}
         className="w-px h-full"
       />
@@ -208,7 +208,7 @@ function Explosion({
         {particles.map((i) => (
           <motion.span
             key={i}
-            className="absolute w-1 h-1 rounded-full bg-primary-container shadow-[0_0_12px_#00f2fe]"
+            className="absolute w-1 h-1 rounded-full bg-primary shadow-[0_0_12px_rgba(63,107,69,0.5)]"
             initial={{
               x: 0,
               y: 0,
@@ -227,7 +227,7 @@ function Explosion({
         ))}
     </AnimatePresence>
       <motion.div
-        className="absolute rounded-full border border-primary-container/70"
+        className="absolute rounded-full border border-primary/50"
         initial={{ width: 0, height: 0, opacity: 1 }}
         animate={{ width: 120, height: 120, opacity: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}

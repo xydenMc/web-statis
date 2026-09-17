@@ -1,28 +1,23 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
+
 // Next.js processes this stylesheet import at build time; TypeScript may not
 // have a declaration for CSS side-effect imports in some editor configurations.
-// @ts-expect-error CSS is handled by Next.js
-
 import "./globals.css";
 
-// Hanken Grotesk is self-hosted via next/font (zero CLS, no extra requests).
-const hankenGrotesk = Hanken_Grotesk({
+// Plus Jakarta Sans is loaded via next/font/google (zero CLS, no extra requests).
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-hanken",
+  variable: "--font-body",
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
-// Geist is loaded via Google Fonts CSS because `next/font/google` does not
-// expose `Geist` / `Geist_Mono` in Next.js 14.2.15. CSS variables `--font-geist`
-// and `--font-geist-mono` are defined in globals.css so tailwind.config.ts
-// keeps resolving the same names. Swap these back to next/font/google once
-// Next is upgraded past the version that exposes them.
-
 export const metadata: Metadata = {
-  title: "Davin Loise S.A.H — Portfolio Siswa SMK RPL",
+  title: "Davin Portfolio — Web Developer & AI-Assisted Development",
   description:
-    "Davin Loise Steven Alinsky Herlambang — siswa XII RPL A SMKN 1 Jenangan Ponorogo. Portofolio Web Development, UI/UX, Programming, dan AI-assisted development.",
+    "Portfolio of Davin Loise Steven Alinsky Herlambang - SMK RPL student showcasing web development, UI/UX design, programming, and AI-assisted development projects.",
 };
 
 export default function RootLayout({
@@ -31,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className={`dark scroll-smooth ${hankenGrotesk.variable}`}>
+    <html lang="id" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -39,18 +34,19 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin=""
         />
+        {/* Google Fonts: Cormorant Garamond & Plus Jakarta Sans */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
           rel="stylesheet"
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
           rel="stylesheet"
         />
-     </head>
-      <body className="bg-background font-body-md text-on-surface relative min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+      </head>
+      <body className="bg-background font-body text-on-surface relative min-h-screen selection:bg-primary selection:text-white antialiased">
         {children}
-     </body>
-   </html>
+      </body>
+    </html>
   );
 }

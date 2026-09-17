@@ -154,10 +154,10 @@ export function Profile3DCard({
         className="relative group cursor-grab active:cursor-grabbing select-none"
         style={{ transformStyle: "preserve-3d" }}
       >
-        <div className="absolute -inset-2 rounded-xl bg-gradient-to-tr from-primary-container/40 via-secondary/30 to-tertiary-container/20 blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+        <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-primary/20 via-secondary/10 to-tertiary/15 blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
         <div
           ref={cardRef}
-          className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-xl overflow-hidden shadow-[0_24px_48px_-10px_rgba(0,0,0,0.7),inset_0_1px_2px_rgba(255,255,255,0.4)] bg-surface-container-high/50 backdrop-blur-2xl border border-white/15 transition-transform duration-100 ease-out will-change-transform"
+          className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-2xl overflow-hidden shadow-[0_24px_48px_-10px_rgba(28,28,25,0.7),inset_0_1px_2px_rgba(255,255,255,0.4)] bg-surfaceContainerHigh/50 backdrop-blur-2xl border border-border transition-transform duration-100 ease-out will-change-transform"
         >
           <img
             src={imageSrc}
@@ -172,19 +172,18 @@ export function Profile3DCard({
                 "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.08) 50%, transparent 80%)",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-transparent to-surface-container-lowest/70 pointer-events-none" />
-          
-          <div className="absolute bottom-space-sm left-space-sm right-space-sm bg-surface-container-lowest/75 backdrop-blur-xl border border-white/10 rounded-xl px-space-md py-space-xs flex items-center justify-between shadow-[0_4px_16px_rgba(0,0,0,0.3)]">
-            <span className="flex items-center gap-space-xs text-primary font-label-md text-label-md">
-              <span className="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00f2fe] animate-pulse" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-transparent to-surfaceContainerLowest/70 pointer-events-none" />
+          <div className="absolute bottom-[1.25rem] left-[1.25rem] right-[1.25rem] bg-surfaceContainerLowest/80 backdrop-blur-xl border border-border rounded-xl px-[1rem] py-[0.5rem] flex items-center justify-between shadow-[0_4px_16px_rgba(28,28,25,0.3)]">
+            <span className="flex items-center gap-[0.5rem] text-primary font-label-md text-xs font-semibold">
+              <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(159,60,22,0.5)] animate-pulse" />
               Davin Loise S.A.H
-           </span>
-            <span className="text-on-surface-variant font-label-sm text-label-sm tracking-wide uppercase">
+            </span>
+            <span className="text-onSurfaceVariant font-label-sm text-xs tracking-wide uppercase">
               XII RPL A
-           </span>
-         </div>
-       </div>
-     </div>
-   </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

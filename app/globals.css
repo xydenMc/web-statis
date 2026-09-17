@@ -2,28 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Geist (Sans) + Geist Mono are loaded via the Google Fonts <link> in
-   app/layout.tsx because next/font/google in Next 14.2.15 does not expose
-   them. The CSS variables below match the names tailwind.config.ts expects. */
-@layer base {
-  :root {
-    --font-geist: "Geist", "Inter", system-ui, -apple-system, "Segoe UI",
-      sans-serif;
-    --font-geist-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo,
-      Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  }
+/* Google Fonts - Cormorant Garamond & Plus Jakarta Sans */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* Font Variables */
+:root {
+  --font-editorial: 'Cormorant Garamond', Georgia, serif;
+  --font-body-font: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
+/* Custom Fonts Configuration */
 @layer base {
   html,
   body {
     margin: 0;
     padding: 0;
   }
+
   body {
     overscroll-behavior: none;
-    background-color: #11121f;
+    background-color: #fcf9f4; /* Background Utama - Cream lembut */
+    color: #1c1c19; /* Teks Utama (On-Surface) - Dark Charcoal */
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
+
   main > :first-child {
     margin-top: 0 !important;
   }
@@ -32,8 +34,26 @@
   }
 }
 
+/* Font utilities for editorial heading */
+@layer utilities {
+  .font-editorial-heading-bold {
+    @apply font-bold;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+  .font-label-md {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  .font-label-sm {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  .tracking-wide {
+    letter-spacing: 0.1em;
+  }
+}
+
+/* Scrollbar hidden */
 ::-webkit-scrollbar {
-  display: none;
+  display: none
 }
 
 .no-scrollbar {
@@ -42,6 +62,46 @@
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Glassmorphism Utility Classes */
+.glass {
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.glass-dark {
+  background: rgba(28, 28, 25, 0.72);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-subtle {
+  background: rgba(246, 243, 238, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(229, 226, 221, 0.5);
+}
+
+/* Button Styles */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-full font-semibold text-xs uppercase tracking-widest text-white bg-primary hover:bg-primaryContainer active:scale-[0.98] transition-all duration-300 shadow-[0_8px_20px_-8px_rgba(159,60,22,0.55)] hover:shadow-[0_12px_32px_-12px_rgba(159,60,22,0.6)];
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full font-semibold text-xs uppercase tracking-wider text-onSurface border border-border hover:bg-surfaceContainer hover:text-primary transition-all duration-300;
+}
+
+/* Card Styles */
+.card-glass {
+  @apply rounded-3xl bg-surfaceContainerLow border border-border shadow-[0_4px_24px_-8px_rgba(159,60,22,0.04),inset_0_1px_1px_0_rgba(255,255,255,0.15)];
+}
+
+.card-glass-hover {
+  @apply rounded-3xl bg-surfaceContainerLow border border-border shadow-[0_4px_24px_-8px_rgba(159,60,22,0.04),inset_0_1px_1px_0_rgba(255,255,255,0.15)] hover:border-primary/20 transition-all duration-300;
 }
 
 /* Reveal on Scroll Effect Styles */
@@ -82,4 +142,112 @@
     black 90%,
     transparent 100%
   );
+}
+
+/* Fluid Container Sizes */
+@container {
+  .container-max {
+    width: min(100% - 2.5rem, 1360px);
+  }
+}
+
+/* Organic/Fluid Typography for Editorial Style */
+@media (min-width: 1024px) {
+  .editorial-display-fluid {
+    font-size: clamp(36px, 5vw, 74px);
+    line-height: 1.05;
+  }
+}
+
+/* Gradient Backgrounds */
+.gradient-primary {
+  background: linear-gradient(135deg, #9f3c16 0%, #bf542c 50%, #825026 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, #45664e 0%, #825026 30%, #9f3c16 100%);
+}
+
+/* Selection Styling */
+::selection {
+  background-color: #9f3c16;
+  color: #ffffff;
+}
+
+/* Focus Styles */
+:focus-visible {
+  outline: 2px solid #bf542c;
+  outline-offset: 2px;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Number badge styling for editorial numbers - use Tailwind text-onSurface directly */
+.num-badge {
+  @apply text-onSurface font-bold;
+}
+
+.num-label {
+  @apply text-xs uppercase tracking-wider text-onSurfaceVariant font-medium;
+}
+
+/* Glass overlay patterns */
+.glass-overlay-t {
+  background: linear-gradient(to top, rgba(28,28,25,0.85) 0%, rgba(28,28,25,0.30) 30%, transparent 100%);
+}
+
+.glass-overlay-b {
+  background: linear-gradient(to bottom, rgba(28,28,25,0.85) 0%, rgba(28,28,25,0.30) 30%, transparent 100%);
+}
+
+/* Infinite Marquee Animation for Skills Cards */
+@keyframes scroll-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-x-reverse {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+.scroller-tape {
+  animation: scroll-x linear infinite;
+  animation-duration: var(--scroll-duration, 40s);
+  animation-timing-function: linear;
+  animation-play-state: running;
+}
+
+.scroller-fast {
+  animation-duration: 20s;
+}
+
+.scroller-slow {
+  animation-duration: 60s;
+}
+
+.scroller-right .scroller-tape {
+  animation: scroll-x-reverse linear infinite;
+  animation-duration: var(--scroll-duration, 40s);
+  animation-timing-function: linear;
+  animation-play-state: running;
+}
+
+.scroller-right .scroller-fast {
+  animation-duration: 20s;
+}
+
+.scroller-right .scroller-slow {
+  animation-duration: 60s;
 }

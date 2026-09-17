@@ -37,53 +37,58 @@ export function InfiniteMovingCards({
     speed === "fast" ? "20s" : speed === "slow" ? "60s" : "45s";
 
   const cardClasses =
-    "relative w-[280px] sm:w-[300px] md:w-[320px] max-w-full shrink-0 rounded-xl bg-surface-container/60 backdrop-blur-xl border border-white/10 px-space-lg py-space-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.18)] flex flex-col justify-between";
+    "relative w-[280px] sm:w-[300px] md:w-[320px] max-w-full shrink-0 rounded-xl bg-surfaceContainerLow/60 backdrop-blur-xl border border-border px-[1.5rem] py-[1rem] flex flex-col justify-between";
 
   const renderCard = (item: InfiniteCard, key: string, ariaHidden?: boolean) => (
     <li key={key} aria-hidden={ariaHidden} className={cardClasses}>
-      <div className="flex flex-col gap-space-sm">
-        <div className="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container">
+      <div className="flex flex-col gap-[0.75rem]">
+        <div className="w-10 h-10 rounded-lg bg-primary/15 flex items-center justify-center text-primary">
           <span className="material-symbols-outlined">{item.icon}</span>
-       </div>
-        <h3 className="text-primary font-headline-sm text-headline-sm">{item.title}</h3>
-        <p className="text-on-surface-variant font-body-sm text-body-sm">
+        </div>
+        <h3 className="text-primary text-sm font-semibold uppercase tracking-wide">
+          {item.title}
+        </h3>
+        <p className="text-onSurfaceVariant text-base leading-relaxed">
           {item.description}
-       </p>
-     </div>
-      <div className="mt-space-md flex flex-wrap gap-space-2xs">
+        </p>
+      </div>
+      <div className="mt-[1rem] flex flex-wrap gap-[0.5rem]">
         {item.tags.map((tag) => (
           <span
             key={tag}
-            className="px-space-xs py-1 rounded-full bg-surface-container-high/70 text-on-surface-variant font-label-sm text-label-sm"
+            className="px-[0.75rem] py-[0.25rem] rounded-full bg-surfaceContainerHigh/60 text-onSurfaceVariant text-xs font-medium border border-border/30"
           >
             {tag}
-         </span>
+          </span>
         ))}
-     </div>
-   </li>
+      </div>
+    </li>
   );
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20 max-w-full overflow-hidden marquee marquee-mask",
+        "scroller relative z-20 max-w-full overflow-hidden",
         className,
       )}
-      style={{ ["--scroll-duration" as string]: duration }}
+      style={({ "--scroll-duration": duration } as React.CSSProperties)}
     >
       <ul
         ref={scrollerRef}
         className={cn(
-          "flex w-max min-w-full shrink-0 flex-nowrap gap-space-md py-space-sm",
-          start && (direction === "left" ? "animate-scroll-x" : "animate-scroll-x-reverse"),
+          "flex w-full min-w-full shrink-0 flex-nowrap gap-[1.5rem] py-[1rem] scroller-tape",
+          start ? "scroller-tape" : "",
+          speed === "fast" && "scroller-fast",
+          speed === "slow" && "scroller-slow",
           pauseOnHover && "hover:[animation-play-state:paused]",
+          direction === "right" && "scroller-right",
         )}
       >
         {items.map((item, i) => renderCard(item, `${item.title}-${i}`))}
         {/* Duplicate set for seamless infinite scroll loop */}
         {items.map((item, i) => renderCard(item, `${item.title}-dup-${i}`, true))}
-     </ul>
-   </div>
+      </ul>
+    </div>
   );
 }
