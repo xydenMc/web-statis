@@ -88,7 +88,6 @@ const PROJECTS: CarouselSlide[] = [
     tech: ["CodeIgniter 4", "PHP", "MySQL", "Bootstrap 5", "JavaScript"],
     image: "/project_2.png",
     role: "Full-Stack Web Developer",
-    demoUrl: "https://web-dinamis-production.up.railway.app",
     sourceUrl: "https://github.com/xydenMc",
   },
   {
@@ -119,6 +118,7 @@ const PROJECTS: CarouselSlide[] = [
     tech: ["CodeIgniter 4", "Bootstrap 5", "Tailwind CSS", "MySQL", "JavaScript"],
     image: "/project_3.png",
     role: "Full-Stack Developer & UI Designer",
+    demoUrl: "https://web-dinamis-production.up.railway.app",
     sourceUrl: "https://github.com/xydenMc",
   },
 ];
